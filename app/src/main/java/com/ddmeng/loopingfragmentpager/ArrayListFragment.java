@@ -10,8 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ArrayListFragment extends ListFragment {
     int mNum;
+
+    @BindView(R.id.text)
+    TextView textView;
 
     /**
      * Create a new instance of CountingFragment, providing "num"
@@ -45,8 +51,8 @@ public class ArrayListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
-        View tv = v.findViewById(R.id.text);
-        ((TextView) tv).setText("Fragment #" + mNum);
+        ButterKnife.bind(this, v);
+        textView.setText("Fragment #" + mNum);
         return v;
     }
 

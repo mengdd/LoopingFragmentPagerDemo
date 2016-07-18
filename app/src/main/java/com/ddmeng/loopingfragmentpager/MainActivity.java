@@ -3,8 +3,10 @@ package com.ddmeng.loopingfragmentpager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     MyAdapter mAdapter;
 
+    @BindView(R.id.pager)
     ViewPager mPager;
 
     @Override
@@ -21,21 +24,18 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new MyAdapter(getSupportFragmentManager());
 
-        mPager = (ViewPager) findViewById(R.id.pager);
+        ButterKnife.bind(this);
         mPager.setAdapter(mAdapter);
 
-        // Watch for button clicks.
-        Button button = (Button) findViewById(R.id.goto_first);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mPager.setCurrentItem(0);
-            }
-        });
-        button = (Button) findViewById(R.id.goto_last);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mPager.setCurrentItem(NUM_ITEMS - 1);
-            }
-        });
+    }
+
+    @OnClick(R.id.goto_first)
+    void goToFirstPage() {
+        mPager.setCurrentItem(0);
+    }
+
+    @OnClick(R.id.goto_last)
+    void goToLastPage() {
+        mPager.setCurrentItem(NUM_ITEMS - 1);
     }
 }
