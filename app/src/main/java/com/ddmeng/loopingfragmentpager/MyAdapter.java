@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends FragmentStatePagerAdapter {
@@ -26,7 +27,13 @@ public class MyAdapter extends FragmentStatePagerAdapter {
         return ArrayListFragment.newInstance(position, title);
     }
 
+
     public void setDataList(List<String> dataList) {
-        this.dataList = dataList;
+        this.dataList = new ArrayList<>(dataList);
+
+        //add two more extra items to the data list
+        this.dataList.add(0, dataList.get(dataList.size() - 1));
+        this.dataList.add(this.dataList.size(), dataList.get(0));
     }
+
 }
