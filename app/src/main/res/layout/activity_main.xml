@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="4dip">
 
-    <android.support.v4.view.ViewPager
+    <com.ddmeng.loopingfragmentpager.looping.LoopViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0px"
