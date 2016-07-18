@@ -4,7 +4,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.List;
+
 public class MyAdapter extends FragmentStatePagerAdapter {
+
+
+    private List<String> dataList = null;
 
     public MyAdapter(FragmentManager fm) {
         super(fm);
@@ -17,6 +22,11 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArrayListFragment.newInstance(position);
+        String title = dataList.get(position);
+        return ArrayListFragment.newInstance(position, title);
+    }
+
+    public void setDataList(List<String> dataList) {
+        this.dataList = dataList;
     }
 }

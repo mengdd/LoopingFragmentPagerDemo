@@ -14,7 +14,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ArrayListFragment extends ListFragment {
-    int mNum;
+    public static final String KEY_NUM = "num";
+    public static final String KEY_TITLE = "title";
+
+    private int mNum;
+    private String title;
+
 
     @BindView(R.id.text)
     TextView textView;
@@ -23,12 +28,13 @@ public class ArrayListFragment extends ListFragment {
      * Create a new instance of CountingFragment, providing "num"
      * as an argument.
      */
-    static ArrayListFragment newInstance(int num) {
+    static ArrayListFragment newInstance(int num, String title) {
         ArrayListFragment f = new ArrayListFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
-        args.putInt("num", num);
+        args.putInt(KEY_NUM, num);
+        args.putString(KEY_TITLE, title);
         f.setArguments(args);
 
         return f;
@@ -40,7 +46,11 @@ public class ArrayListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mNum = arguments.getInt(KEY_NUM);
+            title = arguments.getString(KEY_TITLE);
+        }
     }
 
     /**
@@ -52,7 +62,7 @@ public class ArrayListFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
         ButterKnife.bind(this, v);
-        textView.setText("Fragment #" + mNum);
+        textView.setText("Fragment #" + mNum + ", title: " + title);
         return v;
     }
 
